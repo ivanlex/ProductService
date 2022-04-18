@@ -15,12 +15,12 @@ func main() {
 	fmt.Println("Product service")
 	//defer fmt.Println("Product Ended")
 	logUtility := log.New(os.Stdout, "Product-API", log.LstdFlags)
-	playgroundHandler := handlers.NewPlayground(logUtility)
+	//playgroundHandler := handlers.NewPlayground(logUtility)
 	productsHandler := handlers.NewProducts(logUtility)
 
 	sm := http.NewServeMux()
-	sm.Handle("/", playgroundHandler)
-	sm.Handle("/products", productsHandler)
+	//sm.Handle("/", playgroundHandler)
+	sm.Handle("/", productsHandler)
 
 	s := &http.Server{
 		Addr:         ":9090",
@@ -42,7 +42,7 @@ func main() {
 	signal.Notify(sigChan, os.Kill)
 
 	sig := <-sigChan
-	logUtility.Println("Recieved terminate, graceful shutdown", sig)
+	logUtility.Println("Received terminated, graceful shutdown", sig)
 
 	tc, _ := context.WithTimeout(context.Background(), 30*time.Second)
 

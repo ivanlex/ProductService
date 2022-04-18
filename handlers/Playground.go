@@ -7,15 +7,15 @@ import (
 	"net/http"
 )
 
-type PlaygroundHandler struct {
+type Playground struct {
 	l *log.Logger
 }
 
-func NewPlayground(l *log.Logger) *PlaygroundHandler {
-	return &PlaygroundHandler{l}
+func NewPlayground(l *log.Logger) *Playground {
+	return &Playground{l}
 }
 
-func (p *PlaygroundHandler) ServeHTTP(responseWriter http.ResponseWriter, request *http.Request) {
+func (p *Playground) ServeHTTP(responseWriter http.ResponseWriter, request *http.Request) {
 	p.l.Println("Product API")
 
 	data, err := ioutil.ReadAll(request.Body)
