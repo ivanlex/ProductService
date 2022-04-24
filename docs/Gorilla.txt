@@ -1,2 +1,2 @@
-middleware
+mux - middleware
 Is a handler function and will be executed before other handler.

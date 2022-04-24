@@ -1,3 +1,2 @@
 #Set PROXY
-
 export GOPROXY=https://goproxy.cn
