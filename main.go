@@ -16,7 +16,6 @@ func main() {
 	fmt.Println("Product service")
 	//defer fmt.Println("Product Ended")
 	logUtility := log.New(os.Stdout, "Product-API", log.LstdFlags)
-	//playgroundHandler := handlers.NewPlayground(logUtility)
 	productsHandler := handlers.NewProducts(logUtility)
 
 	// Create a new Router by gorilla framework
@@ -24,7 +23,6 @@ func main() {
 
 	// SubRouter for each http methods
 	getRouter := sm.Methods(http.MethodGet).Subrouter()
-
 	getRouter.HandleFunc("/products", productsHandler.GetProducts)
 
 	putRouter := sm.Methods(http.MethodPut).Subrouter()
