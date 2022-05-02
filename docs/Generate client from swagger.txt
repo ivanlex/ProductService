@@ -1,0 +1,1 @@
+swagger generate client -f swagger.yaml -A clientName

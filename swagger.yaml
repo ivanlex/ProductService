@@ -3,15 +3,19 @@ consumes:
 - application/json
 definitions:
   Product:
-    description: Product defines the structure for an API product
+    description: Product Product defines the structure for an API product
     properties:
       CreatedOn:
+        description: created on
         type: string
       DeletedOn:
+        description: deleted on
         type: string
       UpdatedOn:
+        description: updated on
         type: string
       description:
+        description: description
         type: string
         x-go-name: Description
       id:
@@ -21,19 +25,22 @@ definitions:
         type: integer
         x-go-name: ID
       name:
+        description: name
         type: string
         x-go-name: Name
       price:
+        description: price
         format: float
         type: number
         x-go-name: Price
       sku:
+        description: s k u
         type: string
         x-go-name: SKU
     required:
     - id
     type: object
-    x-go-package: ProductService/data
+    x-go-package: ProductService/client/models
 host: localhost
 info:
   description: Documentation for Product API
@@ -47,7 +54,7 @@ paths:
       operationId: GetProducts
       responses:
         "200":
-          $ref: '#/responses/productsResponse'
+          $ref: '#/responses/data.Product'
       tags:
       - productsResponse
   /products/{id}:

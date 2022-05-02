@@ -8,10 +8,12 @@ import (
 // swagger:route GET /products productsResponse GetProducts
 // Return a list of products from the database
 // responses:
-//	200: productsResponse
+//	200: productResponse
 
 // GetProducts handles GET requests
 func (p *Products) GetProducts(responseWriter http.ResponseWriter, request *http.Request) {
+	//Add response type to client,or you will get failed test this function.
+	responseWriter.Header().Add("Content-Type", "application/json")
 	listProducts := data.GetProducts()
 	err := listProducts.ToJSON(responseWriter)
 	if err != nil {
