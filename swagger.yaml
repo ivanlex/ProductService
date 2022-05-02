@@ -3,6 +3,7 @@ consumes:
 - application/json
 definitions:
   Product:
+    description: Product defines the structure for an API product
     properties:
       CreatedOn:
         type: string
@@ -14,7 +15,9 @@ definitions:
         type: string
         x-go-name: Description
       id:
+        description: the id for this user
         format: int64
+        minimum: 1
         type: integer
         x-go-name: ID
       name:
@@ -27,6 +30,8 @@ definitions:
       sku:
         type: string
         x-go-name: SKU
+    required:
+    - id
     type: object
     x-go-package: ProductService/data
 host: localhost
@@ -42,12 +47,31 @@ paths:
       operationId: GetProducts
       responses:
         "200":
-          $ref: '#/responses/productResponse'
+          $ref: '#/responses/productsResponse'
+      tags:
+      - productsResponse
+  /products/{id}:
+    delete:
+      description: Return a list of products from the database
+      operationId: DeleteProducts
+      parameters:
+      - description: The id of product to delete from the database
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: ID
+      responses:
+        "201":
+          $ref: '#/responses/noContent'
       tags:
       - productsResponse
 produces:
 - application/json
 responses:
+  noContent:
+    description: empty response
   productsResponse:
     description: A list of products
     schema:

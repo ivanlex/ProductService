@@ -39,11 +39,14 @@ func main() {
 	postRouter.Use(productsHandler.MiddlewareProductValidation)
 	postRouter.HandleFunc("/products", productsHandler.AddProducts)
 
+	// Middleware(from go-openapi/runtime) for Redoc
 	opts := middleware.RedocOpts{SpecURL: "/swagger.yaml"}
 	sh := middleware.Redoc(opts, nil)
-
 	getRouter.Handle("/docs", sh)
+
+	// Handle http file request and return swagger.yaml file
 	getRouter.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
+
 	// Create http server
 	s := &http.Server{
 		Addr:         ":9090",
