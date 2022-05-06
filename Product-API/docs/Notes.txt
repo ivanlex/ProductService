@@ -1,0 +1,4 @@
+1. What is GOMODULE111?
+
+2. Swagger client testing request failed.
+Please add header(Content-Type:"application/json") to responseWriter. This will make request correctly.

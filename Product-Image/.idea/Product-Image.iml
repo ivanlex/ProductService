@@ -5,8 +5,5 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Currency" />
-    <orderEntry type="module" module-name="Product-Image" />
-    <orderEntry type="module" module-name="Product-API" />
   </component>
 </module>

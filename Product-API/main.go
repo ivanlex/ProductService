@@ -5,7 +5,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-openapi/runtime/middleware"
+	gohandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	protos "github.com/kevin/currency/protos/currency"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"net/http"
 	"os"
@@ -14,10 +18,22 @@ import (
 )
 
 func main() {
+
 	fmt.Println("Product service")
 	//defer fmt.Println("Product Ended")
 	logUtility := log.New(os.Stdout, "Product-API", log.LstdFlags)
-	productsHandler := handlers.NewProducts(logUtility)
+
+	// make connection for grpc
+	conn, err := grpc.Dial("localhost:9092", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		panic(err)
+	}
+	defer conn.Close()
+
+	// grpc client
+	cc := protos.NewCurrencyClient(conn)
+
+	productsHandler := handlers.NewProducts(logUtility, cc)
 
 	// Create a new Router by gorilla framework
 	sm := mux.NewRouter()
@@ -44,13 +60,16 @@ func main() {
 	sh := middleware.Redoc(opts, nil)
 	getRouter.Handle("/docs", sh)
 
-	// Handle http file request and return swagger.yaml file
+	// Handle http files request and return swagger.yaml files
 	getRouter.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
+
+	// Handel CORS
+	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"http://localhost:3000"}))
 
 	// Create http server
 	s := &http.Server{
 		Addr:         ":9090",
-		Handler:      sm,
+		Handler:      ch(sm),
 		IdleTimeout:  120 * time.Second,
 		ReadTimeout:  1 * time.Second,
 		WriteTimeout: 1 * time.Second,

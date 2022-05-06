@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Currency/.idea/Currency.iml" filepath="$PROJECT_DIR$/Currency/.idea/Currency.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Product-API/.idea/Product-API.iml" filepath="$PROJECT_DIR$/Product-API/.idea/Product-API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Product-Image/.idea/Product-Image.iml" filepath="$PROJECT_DIR$/Product-Image/.idea/Product-Image.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ProductService.iml" filepath="$PROJECT_DIR$/.idea/ProductService.iml" />
     </modules>
   </component>

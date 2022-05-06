@@ -4,16 +4,18 @@ import (
 	"ProductService/data"
 	"context"
 	"fmt"
+	protos "github.com/kevin/currency/protos/currency"
 	"log"
 	"net/http"
 )
 
 type Products struct {
-	l *log.Logger
+	l  *log.Logger
+	cc protos.CurrencyClient
 }
 
-func NewProducts(logger *log.Logger) *Products {
-	return &Products{logger}
+func NewProducts(logger *log.Logger, client protos.CurrencyClient) *Products {
+	return &Products{logger, client}
 }
 
 type KeyProduct struct {

@@ -1,0 +1,15 @@
+1. Install compiling toolchains
+sudo apt-get install autoconf automake libtool curl make g++ unzip
+
+2. Download source code
+https://github.com/protocolbuffers/protobuf/releases/latest
+
+3. Install protoc
+./configure
+ make -j$(nproc) # $(nproc) ensures it uses all cores for compilation
+ make check
+ sudo make install
+ sudo ldconfig # refresh shared library cache.
+
+4. Install protoc-gen-go
+sudo apt install golang-goprotobuf-dev
